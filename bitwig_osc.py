@@ -24,6 +24,11 @@ class BitwigOSC:
         # Instantiate an OSC UDP client.
         self.client = udp_client.SimpleUDPClient(ip, port)
 
+    def __del__(self):
+        """ Cleanup when object is destroyed. """
+        # Stop all the notes that are currently playing.
+        self.stop_all_notes()
+
     def play_note(self, note, vel, chan=None):
         """ Play Bitwig virtual MIDI keyboard using OSC
             API route: /vkb_midi/{Channel:0-16}/note/{Note:0-127} {Velocity:0-127} """
