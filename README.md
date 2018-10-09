@@ -16,4 +16,24 @@ Python3 dependencies:
 pip install python-osc
 ```
 
+To get started, clone this git repo:
+```
+git clone https://github.com/defcronyke/bitwig-osc-python3.git
+cd bitwig-osc-python3
+```
+
+Next open Bitwig, activate the Moss OSC extension by adding it in the Controllers section and making sure it's turned on, then load the Bitwig project found in: projects/examples-and-tests/examples-and-tests.bwproject
+
+With that running, you can now try running some of the tests or examples with Python:
+
+```
+# Test the MIDI play features.
+python tests/test_receive_play.py
+
+# Run an example program which allows you to optionally specify a remote OSC 
+# server IP and port, as well as an optional default MIDI channel to send all 
+# notes on.
+python examples/play_midi_notes.py --ip 127.0.0.1 --port 8000 --chan 1
+```
+
 This project is not affiliated with Bitwig or Moss.
