@@ -13,7 +13,8 @@ import time
 
 
 def run(bw):
-    """ This is where we use the BitwigOSC instance to send our OSC messages. """
+    """ This is where we use the BitwigOSC instance to send our OSC 
+        messages. """
     note = 15   # The note to start on.
     asc = True  # Start ascending.
     n = 100
@@ -46,13 +47,13 @@ def run(bw):
             note2 = note
 
         # Play the first note.
-        bw.play_note(note1, 127)
+        bw.play_note(note1)
         time.sleep(0.1)
         bw.stop_note(note1)
         time.sleep(0.1)
 
         # Play the second note.
-        bw.play_note(note2, 127)
+        bw.play_note(note2)
         time.sleep(0.1)
         bw.stop_note(note2)
         time.sleep(0.1)
