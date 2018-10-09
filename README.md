@@ -7,6 +7,6 @@ Here is the current OSC API for Bitwig, it can do a lot!: https://github.com/git
 
 Download the Bitwig extension from here: http://www.mossgrabers.de/Software/Bitwig/Bitwig.html
 
-These are the installation instructions: https://github.com/git-moss/DrivenByMoss/wiki/Installation#basic-installation
+These are the installation instructions for the Bitwig Moss extension: https://github.com/git-moss/DrivenByMoss/wiki/Installation#basic-installation
 
 This project is not affiliated with Bitwig or Moss.
