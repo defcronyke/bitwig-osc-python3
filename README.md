@@ -9,4 +9,9 @@ Download the Moss Bitwig extension from here: http://www.mossgrabers.de/Software
 
 These are the installation instructions for the Moss Bitwig extension: https://github.com/git-moss/DrivenByMoss/wiki/Installation#basic-installation
 
+Dependencies:
+```bash
+pip install python-osc
+```
+
 This project is not affiliated with Bitwig or Moss.
