@@ -1,28 +1,30 @@
 # Bitwig OSC Python3
 A Python3 client library for the Moss OSC Bitwig extension API.
 
-Bitwig ( https://www.bitwig.com ) is a commercial multi-platform digital audio workstation or DAW. Open Sound Control or OSC ( http://opensoundcontrol.org/introduction-osc ) is a protocol for controlling DAWs and other things. Bitwig doesn't currently support OSC, but a community member named Jürgen Moßgraber ( http://www.mossgrabers.de/Software/Bitwig/Bitwig.html ) has made a Bitwig extension which adds OSC support to Bitwig.
+Bitwig ( https://www.bitwig.com ) is a commercial multi-platform digital audio workstation or DAW. Open Sound Control or OSC ( http://opensoundcontrol.org/introduction-osc ) is a protocol for controlling DAWs and other things.  
+
+Bitwig doesn't currently support OSC, but a community member named Jürgen Moßgraber ( http://www.mossgrabers.de/Software/Bitwig/Bitwig.html ) has made a Bitwig extension which adds OSC support to Bitwig.
 
 This library aims to provide a high-level abstraction for the Moss OSC Bitwig API, which can be used to control Bitwig with Python3.
 
-Here is the current OSC API for Bitwig, it can do a lot!:
+Here is the current OSC API for Bitwig, it can do a lot!:  
 https://github.com/git-moss/DrivenByMoss/wiki/Open-Sound-Control-(OSC)
   
   
 Getting Started:
 
-Download Bitwig Studio and install it (there is a free demo version, or you can buy it):
+Download Bitwig Studio and install it (there is a free demo version, or you can buy it):  
 https://www.bitwig.com/en/download.html
 
-Download the Moss Bitwig extension from here:
+Download the Moss Bitwig extension from here:  
 http://www.mossgrabers.de/Software/Bitwig/Bitwig.html
 
-These are the installation instructions for the Moss Bitwig extension, make sure to follow these before continuing:
-https://github.com/git-moss/DrivenByMoss/wiki/Installation#basic-installation
-and
+These are the installation instructions for the Moss Bitwig extension, make sure to follow these before continuing:  
+https://github.com/git-moss/DrivenByMoss/wiki/Installation#basic-installation  
+and  
 https://github.com/git-moss/DrivenByMoss/wiki/Installation#open-sound-control-osc-specifics
 
-Install Python3 from your distribution's package manager, or from here:
+Install Python3 from your distribution's package manager, or from here:  
 https://www.python.org/downloads/
 
 Install the Python3 dependencies:
@@ -30,7 +32,7 @@ Install the Python3 dependencies:
 pip install python-osc
 ```
 
-Install git if you don't have it yet, either from your distribution's package manager, or from here:
+Install git if you don't have it yet, either from your distribution's package manager, or from here:  
 https://git-scm.com/downloads
 
 Clone this git repository:
@@ -39,7 +41,7 @@ git clone https://github.com/defcronyke/bitwig-osc-python3.git
 cd bitwig-osc-python3
 ```
 
-Open Bitwig, activate the Moss OSC extension by adding it in the Controllers section and making sure it's turned on, then load the Bitwig project found in:
+Open Bitwig, activate the Moss OSC extension by adding it in the Controllers section and making sure it's turned on, then load the Bitwig project found in:  
 bitwig-projects/examples-and-tests/examples-and-tests.bwproject
 
 With the Bitwig project running along with the Moss OSC extension, you can now try running some of the tests or examples with Python. You will want to turn on your speakers or headphones for this:
