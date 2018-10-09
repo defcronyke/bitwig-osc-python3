@@ -30,15 +30,51 @@ class BitwigOSC:
         """ Cleanup when object is destroyed. """
         # Stop all the notes that are currently playing.
         self.stop_all_playing_notes()
+        self.stop_all_playing_notes("drum")
+
+    # --- Receive - Track ---
+    # API Route: /{track|master}
+    # https://github.com/git-moss/DrivenByMoss/wiki/Open-Sound-Control-(OSC)#receive---track
+
+    def record_arm_track(self, track=1, arm=1):
+        """ Arm a track for recording. This also affects which MIDI tracks 
+            are used for real-time playback. Set arm to 0 to disarm a 
+            track, or None to toggle the armed status.
+            API route: /track/{1-8}/recarm {1,0,-} """
+        # Send the record arm message to the OSC server.
+        self.client.send_message(
+            "/track/" + str(track) + "/recarm", arm)
+
+    def record_disarm_track(self, track=1):
+        """ Disarm a track for recording. This also affects which MIDI tracks 
+            are used for real-time playback. This is a shortcut for calling 
+            record_arm_track(track, 0). """
+        # Send the record arm message to the OSC server.
+        self.record_arm_track(track, 0)
+
+    def record_disarm_first_eight_tracks(self):
+        """ Disarm the first eight tracks for recording. """
+        for i in range(8):
+            self.record_disarm_track(i+1)
+
+    def record_arm_toggle_track(self, track=1):
+        """ Toggle the armed status of a track for recording. This also 
+            affects which MIDI tracks are used for real-time playback. 
+            This is a shortcut for calling record_arm_track(track, None). """
+        # Send the record arm message to the OSC server.
+        self.record_arm_track(track, None)
+
+    # --- End Receive - Track ---
 
     # --- Receive - Play ---
     # API Route: /vkb_midi
     # https://github.com/git-moss/DrivenByMoss/wiki/Open-Sound-Control-(OSC)#receive---play
 
-    def play_note(self, note=60, vel=127, chan=None):
+    def play_note(self, note=60, vel=127, typ="note", chan=None):
         """ Play Bitwig virtual MIDI keyboard using OSC. Defaults to playing 
-            Middle C (C2) at full velocity.
-            API route: /vkb_midi/{Channel:0-16}/note/{Note:0-127} {Velocity:0-127} """
+            Middle C (C2) at full velocity. Pass in "drum" for the typ param if
+            you want to play drums.
+            API route: /vkb_midi/{Channel:0-16}/{note|drum}/{Note:0-127} {Velocity:0-127} """
         # Use default MIDI channel if chan argument not specified.
         if chan == None:
             chan = self.chan
@@ -56,12 +92,13 @@ class BitwigOSC:
         self.last_note = note
 
         # Send the note message to the OSC server.
-        self.client.send_message("/vkb_midi/" + str(chan) +
-                                 "/note/" + str(note), vel)
+        self.client.send_message(
+            "/vkb_midi/" + str(chan) + "/" + typ + "/" + str(note), vel)
 
-    def stop_note(self, note=60, chan=None):
+    def stop_note(self, note=60, typ="note", chan=None):
         """ Stop a note by setting its velocity to zero. This is a shortcut 
-            for calling play_note(note, 0). """
+            for calling play_note(note, 0). Pass in "drum" for the typ
+            param if you want to stop a drum note. """
         # Use default MIDI channel if chan argument not specified.
         if chan == None:
             chan = self.chan
@@ -71,32 +108,35 @@ class BitwigOSC:
 
         # Send the note message to the OSC server to turn off the note.
         self.client.send_message("/vkb_midi/" + str(chan) +
-                                 "/note/" + str(note), 0)
+                                 "/" + typ + "/" + str(note), 0)
 
-    def stop_all_playing_notes(self, chan=None):
+    def stop_all_playing_notes(self, typ="note", chan=None):
         """ Send velocity 0 to all notes that are currently playing, to turn 
-            them off. This is being used as a trap function that runs when 
-            you press ctrl-c, so there aren't any lingering notes when the 
-            program exits. """
+            them off. Pass in "drum" as the typ param if you want to stop all 
+            the drum notes that are currently playing. This is being used as 
+            a trap function that runs when you press ctrl-c, so there aren't 
+            any lingering notes when the program exits. """
         # Use default MIDI channel if chan argument not specified.
         if chan == None:
             chan = self.chan
 
         # Stop all the notes that are currently playing.
         for note in list(self.notes_on):
-            self.stop_note(note, chan)
+            self.stop_note(note, typ, chan)
 
-    def stop_all_notes(self, chan=None):
-        """ Send velocity 0 to all notes, to turn them off. """
+    def stop_all_notes(self, typ="note", chan=None):
+        """ Send velocity 0 to all notes, to turn them off. Pass in "drum"
+            as the typ param if you want to turn off drum notes. """
         # Use default MIDI channel if chan argument not specified.
         if chan == None:
             chan = self.chan
 
         for note in range(128):
-            self.stop_note(note, chan)
+            self.stop_note(note, typ, chan)
 
-    def octave_up(self, chan=None):
-        """ Permanently shift all notes up by eight.
+    def octave_up(self, typ="note", chan=None):
+        """ Permanently shift all notes up by eight. Pass in "drum" for the
+            typ param if you want to shift the octave of the drums.
             API Route: /vkb_midi/{Channel:0-16}/note/+ """
         # Use default MIDI channel if chan argument not specified.
         if chan == None:
@@ -104,10 +144,12 @@ class BitwigOSC:
 
         # Send the note message to the OSC server to make all future note
         # plays be an octave higher than they should be.
-        self.client.send_message("/vkb_midi/" + str(chan) + "/note/+", 1)
+        self.client.send_message(
+            "/vkb_midi/" + str(chan) + "/" + typ + "/+", 1)
 
-    def octave_down(self, chan=None):
-        """ Permanently shift all notes down by eight.
+    def octave_down(self, typ="note", chan=None):
+        """ Permanently shift all notes down by eight. Pass in "drum" for the
+            typ param if you want to shift the octave of the drums.
             API Route: /vkb_midi/{Channel:0-16}/note/- """
         # Use default MIDI channel if chan argument not specified.
         if chan == None:
@@ -115,7 +157,8 @@ class BitwigOSC:
 
         # Send the note message to the OSC server to make all future note
         # plays be an octave lower than they should be.
-        self.client.send_message("/vkb_midi/" + str(chan) + "/note/-", 1)
+        self.client.send_message(
+            "/vkb_midi/" + str(chan) + "/" + typ + "/-", 1)
 
     # --- End Receive - Play ---
 
@@ -125,6 +168,7 @@ class BitwigOSC:
 
         # Stop all the notes that are currently playing.
         self.stop_all_playing_notes()
+        self.stop_all_playing_notes("drum")
 
         # Exit the program indicating no error.
         sys.exit(0)
