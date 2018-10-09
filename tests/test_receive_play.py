@@ -4,8 +4,8 @@
     Synth track for track 1 with a synth that has all the keys available, 
     and a MIDI Drum track for track 2 with a drumkit that has at least 
     two drums. All tracks should be record disarmed initially. There is
-    an example Bitwig project in the projects/ folder which fits this
-    criteria. """
+    an example Bitwig project in the bitwig-projects/ folder which fits 
+    this criteria. """
 
 # Add one directory level up to the Python module search path.
 # Only needed if your Python file is in a subdirectory.

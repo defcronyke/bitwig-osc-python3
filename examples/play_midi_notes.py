@@ -1,8 +1,8 @@
 """ Example of how to play MIDI notes, by Daphne Volante 2018
 
     This example requires a MIDI synth loaded into Bitwig with all the keys 
-    assigned, in track 1. There is an example Bitwig project in the projects/
-    folder which fits this criteria. """
+    assigned, in track 1. There is an example Bitwig project in the 
+    bitwig-projects/ folder which fits this criteria. """
 
 # Add one directory level up to the Python module search path.
 # Only needed if your Python file is in a subdirectory.
