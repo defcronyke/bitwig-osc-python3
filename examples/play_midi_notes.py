@@ -1,4 +1,4 @@
-# Example by Daphne Volante 2018
+""" Example of how to play MIDI notes, by Daphne Volante 2018 """
 
 # Add one directory level up to the Python module search path.
 # Only needed if your Python file is in a subdirectory.

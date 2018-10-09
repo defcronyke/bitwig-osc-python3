@@ -1,14 +1,15 @@
-""" Bitwig OSC client example - Daphne1 """
-import signal
-import sys
+""" Bitwig OSC Python3 by Jeremy Carter <Jeremy@JeremyCarter.ca> 2018 """
 from pythonosc import osc_message_builder
 from pythonosc import udp_client
+import signal
+import sys
 
 
 class BitwigOSC:
     """ A client library for the Moss Bitwig OSC API, to control Bitwig with 
         the Open Sound Control protocol.
-        ( API: https://github.com/git-moss/DrivenByMoss/wiki/Open-Sound-Control-(OSC) ) """
+
+        API: https://github.com/git-moss/DrivenByMoss/wiki/Open-Sound-Control-(OSC) """
 
     def __init__(self, ip="127.0.0.1", port=8000, chan=1):
         """ Set the OSC server's IP and port while instantiating the OSC client, 
