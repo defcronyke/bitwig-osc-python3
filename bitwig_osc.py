@@ -137,7 +137,7 @@ class BitwigOSC:
     def octave_up(self, typ="note", chan=None):
         """ Permanently shift all notes up by eight. Pass in "drum" for the
             typ param if you want to shift the octave of the drums.
-            API Route: /vkb_midi/{Channel:0-16}/{note|drum}/+ """
+            API route: /vkb_midi/{Channel:0-16}/{note|drum}/+ """
         # Use default MIDI channel if chan argument not specified.
         if chan == None:
             chan = self.chan
@@ -150,7 +150,7 @@ class BitwigOSC:
     def octave_down(self, typ="note", chan=None):
         """ Permanently shift all notes down by eight. Pass in "drum" for the
             typ param if you want to shift the octave of the drums.
-            API Route: /vkb_midi/{Channel:0-16}/{note|drum}/- """
+            API route: /vkb_midi/{Channel:0-16}/{note|drum}/- """
         # Use default MIDI channel if chan argument not specified.
         if chan == None:
             chan = self.chan
