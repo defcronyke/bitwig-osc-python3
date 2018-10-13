@@ -55,7 +55,7 @@ class BitwigOSC:
     def undo(self):
         """ Undo the last action.
 
-            API route: /undo """
+            API route: /undo - """
 
         # Send the undo message to the OSC server.
         self.client.send_message("/undo", None)
@@ -63,7 +63,7 @@ class BitwigOSC:
     def redo(self):
         """ Redo the last action that was undone. 
 
-            API route: /redo """
+            API route: /redo - """
 
         # Send the redo message to the OSC server.
         self.client.send_message("/redo", None)
@@ -77,7 +77,7 @@ class BitwigOSC:
     def next_project(self):
         """ Switch to the next opened project. 
 
-            API route: /project/+ """
+            API route: /project/+ - """
 
         # Send the next project message to the OSC server.
         self.client.send_message("/project/+", None)
@@ -85,7 +85,7 @@ class BitwigOSC:
     def previous_project(self):
         """ Switch to the previous opened project.
 
-            API route: /project/- """
+            API route: /project/- - """
 
         # Send the previous project message to the OSC server.
         self.client.send_message("/project/-", None)
@@ -109,7 +109,7 @@ class BitwigOSC:
     def toggle_audio_engine(self):
         """ Toggle the audio engine between active and inactive.
 
-            API route: /project/engine """
+            API route: /project/engine - """
 
         # Send the toggle engine message to the OSC server.
         self.client.send_message("/project/engine", None)
@@ -117,12 +117,211 @@ class BitwigOSC:
     def save(self):
         """ Save the current project. 
 
-            API route: /project/save """
+            API route: /project/save - """
 
         # Send the save message to the OSC server.
         self.client.send_message("/project/save", None)
 
     # --- End Receive - Project ---
+
+    # --- Receive - Transport ---
+
+    def stop(self):
+        """ Stop the transport.
+
+            API route: /stop {1,-} """
+
+        # Send the stop message to the OSC server.
+        self.client.send_message("/stop", 1)
+
+    def play(self):
+        """ Play.
+
+            API route: /play {1,-} """
+
+        # Send the play message to the OSC server.
+        self.client.send_message("/play", 1)
+
+    def restart(self):
+        """ Restart.
+
+            API route: /restart {1,-} """
+
+        # Send the restart message to the OSC server.
+        self.client.send_message("/restart", 1)
+
+    def repeat(self):
+        """ Repeat.
+
+            API route: /repeat {1,-} """
+
+        # Send the repeat message to the OSC server.
+        self.client.send_message("/repeat", 1)
+
+    def click(self):
+        """ Enable click.
+
+            API route: /click 1 """
+
+        # Send the enable click message to the OSC server.
+        self.client.send_message("/click", 1)
+
+    def toggle_click(self):
+        """ Toggle click.
+
+            API route: /click - """
+
+        # Send the toggle click message to the OSC server.
+        self.client.send_message("/click", None)
+
+    def click_volume(self):
+        """ Click volume.
+
+            API route: /click/volume - """
+
+        # Send the click volume message to the OSC server.
+        self.client.send_message("/click/volume", None)
+
+    def toggle_click_preroll(self):
+        """ Toggle click in preroll.
+
+            API route: /click/preroll {1, -} """
+
+        # Send the toggle click preroll message to the OSC server.
+        self.client.send_message("/click/preroll", 1)
+
+    def punch_in(self):
+        """ Punch in.
+
+            API route: /punchIn {1, -} """
+
+        # Send the punch in message to the OSC server.
+        self.client.send_message("/punchIn", 1)
+
+    def punch_out(self):
+        """ Punch out.
+
+            API route: /punchOut {1, -} """
+
+        # Send the punch out message to the OSC server.
+        self.client.send_message("/punchOut", 1)
+
+    def record(self):
+        """ Record.
+
+            API route: /record {1, -} """
+
+        # Send the record message to the OSC server.
+        self.client.send_message("/record", 1)
+
+    def overdub(self):
+        """ Overdub.
+
+            API route: /overdub {1, -} """
+
+        # Send the overdub message to the OSC server.
+        self.client.send_message("/overdub", 1)
+
+    def overdub_launcher(self):
+        """ Overdub launcher.
+
+            API route: /overdub/launcher {1, -} """
+
+        # Send the overdub launcher message to the OSC server.
+        self.client.send_message("/overdub/launcher", 1)
+
+    def crossfade(self, n):
+        """ Crossfade with the value from the n param.
+
+            API route: /crossfade {0-127} """
+
+        # Send the crossfade message to the OSC server.
+        self.client.send_message("/crossfade", n)
+
+    def autowrite(self, enable=1):
+        """ Autowrite. Pass 0 as the enable param to disable.
+
+            API route: /autowrite {0, 1} """
+
+        # Send the autowrite message to the OSC server.
+        self.client.send_message("/autowrite", enable)
+
+    def autowrite_launcher(self, enable=1):
+        """ Autowrite launcher. Pass 0 as the enable param to disable.
+
+            API route: /autowrite/launcher {0, 1} """
+
+        # Send the autowrite launcher message to the OSC server.
+        self.client.send_message("/autowrite/launcher", enable)
+
+    def automation_write_mode(self, mode="latch"):
+        """ Automation write mode. The mode param can be "latch", "touch",
+            or "write".
+
+            API route: /automationWriteMode {latch, touch, write} """
+
+        # Send the automation write mode message to the OSC server.
+        self.client.send_message("/automationWriteMode", mode)
+
+    def raw_tempo(self, n=0):
+        """ Set raw tempo with the n param.
+
+            API route: /tempo/raw {0-666} """
+
+        # Send the raw tempo message to the OSC server.
+        self.client.send_message("/tempo/raw", n)
+
+    def tap_tempo(self):
+        """ Tap the tempo.
+
+            API route: /tempo/tap - """
+
+        # Send the tap tempo message to the OSC server.
+        self.client.send_message("/tempo/tap", None)
+
+    def increase_position_small(self):
+        """ Increase the play position a bit.
+
+            API route: /position/+ - """
+
+        # Send the increase position small message to the OSC server.
+        self.client.send_message("/position/+", None)
+
+    def decrease_position_small(self):
+        """ Decrease the play position a bit.
+
+            API route: /position/- - """
+
+        # Send the decrease position small message to the OSC server.
+        self.client.send_message("/position/-", None)
+
+    def increase_position_large(self):
+        """ Increase the play position a lot.
+
+            API route: /position/++ - """
+
+        # Send the increase position large message to the OSC server.
+        self.client.send_message("/position/++", None)
+
+    def decrease_position_large(self):
+        """ Decrease the play position a lot.
+
+            API route: /position/-- - """
+
+        # Send the decrease position large message to the OSC server.
+        self.client.send_message("/position/--", None)
+
+    def move_position(self, n=1):
+        """ Move the play position by the n param.
+            If n is -1, or 1, move by a small amount.
+            Move by a large amount for any other values.
+
+            API route: /position {-2, -1, 1, 2} """
+
+        # Send the move position large message to the OSC server.
+        self.client.send_message("/position", n)
+
+    # --- End Receive - Transport ---
 
     # --- Receive - Track ---
     # API route: /{track|master}
@@ -133,7 +332,7 @@ class BitwigOSC:
             are used for real-time playback. Set arm to 0 to disarm a 
             track, or None to toggle the armed status.
 
-            API route: /track/{1-8}/recarm 1 """
+            API route: /track/{1-8}/recarm {0, 1} """
 
         # Send the record arm message to the OSC server.
         self.client.send_message(
@@ -155,12 +354,12 @@ class BitwigOSC:
         for i in range(8):
             self.record_disarm_track(i+1)
 
-    def record_toggle_track(self, track=1):
+    def toggle_record_arm_track(self, track=1):
         """ Toggle the armed status of a track for recording. This also 
             affects which MIDI tracks are used for real-time playback. 
             This is a shortcut for calling record_arm_track(track, None).
 
-            API route: /track/{1-8}/recarm """
+            API route: /track/{1-8}/recarm - """
 
         # Send the record arm message to the OSC server.
         self.record_arm_track(track, None)
@@ -263,7 +462,7 @@ class BitwigOSC:
         """ Permanently shift all notes up by eight. Pass in "drum" for the
             typ param if you want to shift the octave of the drums.
 
-            API route: /vkb_midi/{Channel:0-16}/{note|drum}/+ """
+            API route: /vkb_midi/{Channel:0-16}/{note|drum}/+ 1 """
 
         # Use default MIDI channel if chan argument not specified.
         if chan == None:
@@ -278,7 +477,7 @@ class BitwigOSC:
         """ Permanently shift all notes down by eight. Pass in "drum" for the
             typ param if you want to shift the octave of the drums.
 
-            API route: /vkb_midi/{Channel:0-16}/{note|drum}/- """
+            API route: /vkb_midi/{Channel:0-16}/{note|drum}/- 1 """
 
         # Use default MIDI channel if chan argument not specified.
         if chan == None:
