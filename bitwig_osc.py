@@ -277,7 +277,7 @@ class BitwigOSC:
             API route: /tempo/tap - """
 
         # Send the tap tempo message to the OSC server.
-        self.client.send_message("/tempo/tap", None)
+        self.client.send_message("/tempo/tap", 1)
 
     def increase_position_small(self):
         """ Increase the play position a bit.
