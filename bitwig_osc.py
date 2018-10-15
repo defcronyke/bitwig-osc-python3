@@ -58,7 +58,7 @@ class BitwigOSC:
             API route: /undo - """
 
         # Send the undo message to the OSC server.
-        self.client.send_message("/undo", -1)
+        self.client.send_message("/undo", "-")
 
     def redo(self):
         """ Redo the last action that was undone. 
@@ -66,7 +66,7 @@ class BitwigOSC:
             API route: /redo - """
 
         # Send the redo message to the OSC server.
-        self.client.send_message("/redo", -1)
+        self.client.send_message("/redo", "-")
 
     # --- End Receive - Global ---
 
@@ -80,7 +80,7 @@ class BitwigOSC:
             API route: /project/+ - """
 
         # Send the next project message to the OSC server.
-        self.client.send_message("/project/+", -1)
+        self.client.send_message("/project/+", "-")
 
     def previous_project(self):
         """ Switch to the previous opened project.
@@ -88,7 +88,7 @@ class BitwigOSC:
             API route: /project/- - """
 
         # Send the previous project message to the OSC server.
-        self.client.send_message("/project/-", -1)
+        self.client.send_message("/project/-", "-")
 
     def activate_audio_engine(self):
         """ Activate the audio engine.
@@ -112,7 +112,7 @@ class BitwigOSC:
             API route: /project/engine - """
 
         # Send the toggle engine message to the OSC server.
-        self.client.send_message("/project/engine", -1)
+        self.client.send_message("/project/engine", "-")
 
     def save(self):
         """ Save the current project. 
@@ -120,7 +120,7 @@ class BitwigOSC:
             API route: /project/save - """
 
         # Send the save message to the OSC server.
-        self.client.send_message("/project/save", -1)
+        self.client.send_message("/project/save", "-")
 
     # --- End Receive - Project ---
 
@@ -172,7 +172,7 @@ class BitwigOSC:
             API route: /click - """
 
         # Send the toggle click message to the OSC server.
-        self.client.send_message("/click", -1)
+        self.client.send_message("/click", "-")
 
     def click_volume(self):
         """ Click volume.
@@ -180,7 +180,7 @@ class BitwigOSC:
             API route: /click/volume - """
 
         # Send the click volume message to the OSC server.
-        self.client.send_message("/click/volume", -1)
+        self.client.send_message("/click/volume", "-")
 
     def toggle_click_preroll(self):
         """ Toggle click in preroll.
@@ -233,7 +233,7 @@ class BitwigOSC:
     def crossfade(self, n):
         """ Crossfade with the value from the n param.
 
-            API route: /crossfade {0-127} """
+            API route: /crossfade {0"-"27} """
 
         # Send the crossfade message to the OSC server.
         self.client.send_message("/crossfade", n)
@@ -285,7 +285,7 @@ class BitwigOSC:
             API route: /position/+ - """
 
         # Send the increase position small message to the OSC server.
-        self.client.send_message("/position/+", -1)
+        self.client.send_message("/position/+", "-")
 
     def decrease_position_small(self):
         """ Decrease the play position a bit.
@@ -293,7 +293,7 @@ class BitwigOSC:
             API route: /position/- - """
 
         # Send the decrease position small message to the OSC server.
-        self.client.send_message("/position/-", -1)
+        self.client.send_message("/position/-", "-")
 
     def increase_position_large(self):
         """ Increase the play position a lot.
@@ -301,7 +301,7 @@ class BitwigOSC:
             API route: /position/++ - """
 
         # Send the increase position large message to the OSC server.
-        self.client.send_message("/position/++", -1)
+        self.client.send_message("/position/++", "-")
 
     def decrease_position_large(self):
         """ Decrease the play position a lot.
@@ -309,7 +309,7 @@ class BitwigOSC:
             API route: /position/-- - """
 
         # Send the decrease position large message to the OSC server.
-        self.client.send_message("/position/--", -1)
+        self.client.send_message("/position/--", "-")
 
     def move_position(self, n=1):
         """ Move the play position by the n param.
@@ -330,7 +330,7 @@ class BitwigOSC:
     def record_arm_track(self, track=1, arm=1):
         """ Arm a track for recording. This also affects which MIDI tracks 
             are used for real-time playback. Set arm to 0 to disarm a 
-            track, or -1 to toggle the armed status.
+            track, or "-" to toggle the armed status.
 
             API route: /track/{1-8}/recarm {0, 1} """
 
@@ -357,12 +357,12 @@ class BitwigOSC:
     def toggle_record_arm_track(self, track=1):
         """ Toggle the armed status of a track for recording. This also 
             affects which MIDI tracks are used for real-time playback. 
-            This is a shortcut for calling record_arm_track(track, -1).
+            This is a shortcut for calling record_arm_track(track, "-").
 
             API route: /track/{1-8}/recarm - """
 
         # Send the record arm message to the OSC server.
-        self.record_arm_track(track, -1)
+        self.record_arm_track(track, "-")
 
     # --- End Receive - Track ---
 
